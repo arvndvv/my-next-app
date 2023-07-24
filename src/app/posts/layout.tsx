@@ -8,7 +8,6 @@ async function getPosts() {
 
 export default function Layout({ children }: any) {
   let posts = use(getPosts()).posts;
-  console.log(posts, "hi");
 
   return (
     <div>

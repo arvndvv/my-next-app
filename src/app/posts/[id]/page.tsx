@@ -6,20 +6,20 @@ interface IParams {
 }
 
 async function getPostById(id: number) {
+  if (!id) return {};
   let post = await fetch(`https://dummyjson.com/post/${id}`);
   return post.json();
 }
 async function getUsertById(id: number) {
-  let post = await fetch(`https://dummyjson.com/user/${id}`);
-  return post.json();
+  if (!id) return {};
+  let user = await fetch(`https://dummyjson.com/user/${id}`);
+  return user.json();
 }
 
 export default function Page({ params }: IParams) {
   const { id } = params;
   const post = use(getPostById(id));
   const user = use(getUsertById(post.userId));
-  console.log(user);
-  console.log(post);
   return (
     <div className="flex flex-col gap-5">
       <div className="header w-fit flex flex-col gap-2">
@@ -29,11 +29,13 @@ export default function Page({ params }: IParams) {
             {user.firstName + " " + user.lastName}
           </small>
           <div className="tags flex gap-2">
-            {post.tags.map((tag: string, index: number) => (
-              <span key={index} className="px-2 bg-slate-700">
-                {tag}
-              </span>
-            ))}
+            {post.tags
+              ? post.tags.map((tag: string, index: number) => (
+                  <span key={index} className="px-2 bg-slate-700">
+                    {tag}
+                  </span>
+                ))
+              : ""}
           </div>
         </div>
       </div>
