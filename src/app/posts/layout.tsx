@@ -18,7 +18,7 @@ export default function Layout({ children }: any) {
             className="p-2 bg-slate-900 w-[30%] flex flex-col gap-5 justify-between"
           >
             <strong className="text-xl text-slate-300">{post.title}</strong>
-            <Link href={`/posts/${post.id}`}>
+            <Link href="/posts/[id]" as={`/posts/${post.id}`}>
               <button className="btn bg-blue-400 px-3 py-1">Read More</button>
             </Link>
           </div>
